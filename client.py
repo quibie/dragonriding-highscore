@@ -32,12 +32,20 @@ async def on_ready():
     async for msg in channel.history(limit=200):
         if msg.author == client.user:
             counter +=1
-            print(f'{msg.content}\n')
+            print(f'Nachricht Nr.{counter}: {msg.content}\n')
     
     if counter > 0:
         print(f'Anzahl der Nachrichten: {counter} \n')
     else:
         await channel.send(content='meine erste Nachricht durch code')
+
+    #init create 4 threads
+    if len(channel.threads) == 0:
+       for threadName in ['Waking Shores', 'Ohn\'ahran Plains', 'Azure Span', 'Thaldaszus']:
+            await channel.create_thread(name=threadName)
+            print(f'created Thread {threadName}\n')
+    else:
+        print(f'all thread are already created')
 
 
 
